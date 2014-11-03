@@ -1,18 +1,52 @@
 var React = require('react');
+
 var Frame = require('./Frame.react');
 var MoveCounter = require('./MoveCounter.react');
 var Shuffle = require('./Shuffle.react');
+var TileStore = require('../stores/TileStore.js');
+
+var FRAME_SIZE = 3;
+
+function getTileState() {
+  return {
+    tiles: TileStore.getAll(),
+    solved: TileStore.isSolved()
+  };
+}
 
 var Game = React.createClass({
-  render: function() {
+
+  getInitialState: function () {
+    return getTileState();
+  },
+
+  componentWillMount: function () {
+    // Load tiles in Store
+    TileStore.seed(FRAME_SIZE * FRAME_SIZE);
+  },
+
+  componentDidMount: function () {
+    TileStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    TileStore.removeChangeListener(this._onChange);
+  },
+
+  render: function () {
     return (
       <div className="game">
-        <Frame size={3 * 3} />
+        <Frame tiles={this.state.tiles} />
         <MoveCounter />
         <Shuffle />
       </div>
     );
+  },
+
+  _onChange: function () {
+    this.setState(getTileState());
   }
+
 });
 
 module.exports = Game;

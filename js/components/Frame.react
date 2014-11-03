@@ -3,23 +3,24 @@ var Tile = require('./Tile.react');
 
 var Frame = React.createClass({
   propTypes: {
-    size: React.PropTypes.number
+    tiles: React.PropTypes.array
   },
 
   render: function () {
-    var tiles = [];
+    var tiles = this.props.tiles;
 
-    for (var i = 1; i <= this.props.size; i++) {
-      tiles.push(<Tile
-        id={i}
-        key={i}
-        missing={(i == this.props.size)} />
+    var tileComponents = tiles.map(function (tile) {
+      return (
+        <Tile
+          id={tile.id}
+          key={tile.id}
+          missing={tile.id == tiles.length - 1} />
       );
-    }
+    });
 
     return (
       <div className="frame">
-        {tiles}
+        {tileComponents}
       </div>
     );
   }
