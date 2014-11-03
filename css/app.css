@@ -4,13 +4,14 @@
 }
 
 .tile {
-  background: #eee;
+  background: url(/assets/schunck.jpg) no-repeat;
   border: 1px solid #fff;
+  color: transparent;
   display: table-cell;
   float: left;
-  height: 98px;
+  height: 158px;
   text-align: center;
-  width: 98px;
+  width: 158px;
 }
 
 .tile.missing {

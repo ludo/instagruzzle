@@ -6,7 +6,7 @@ var FrameConstants = require('../constants/FrameConstants');
 var CHANGE_EVENT = 'change';
 
 // Default frame (edge) size
-var _size = 3;
+var _size = 4;
 
 var FrameStore = Object.assign(EventEmitter.prototype, {
 

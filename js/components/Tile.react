@@ -5,7 +5,11 @@ var TileActions = require('../actions/TileActions.js');
 var Tile = React.createClass({
   propTypes: {
     id: React.PropTypes.number,
-    missing: React.PropTypes.bool
+    height: React.PropTypes.number,
+    missing: React.PropTypes.bool,
+    width: React.PropTypes.number,
+    x: React.PropTypes.number,
+    y: React.PropTypes.number
   },
 
   render: function () {
@@ -14,9 +18,17 @@ var Tile = React.createClass({
       'tile': true
     });
 
+    var styleAttrs = {
+      backgroundPosition:
+        -(this.props.x * this.props.width) + 'px ' +
+        -(this.props.y * this.props.height) + 'px'
+    };
+
     return (
-      <div className={classes} onClick={this._onClick}>
+      <div className={classes} onClick={this._onClick} style={styleAttrs}>
         {this.props.id}
+        <br />
+        <small>({this.props.x}, {this.props.y})</small>
       </div>
     );
   },

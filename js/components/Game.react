@@ -37,7 +37,10 @@ var Game = React.createClass({
   render: function () {
     return (
       <div className="game">
-        <Frame tiles={this.state.tiles} />
+        <Frame
+          cols={this.state.size}
+          rows={this.state.size}
+          tiles={this.state.tiles} />
         <MoveCounter />
         <Shuffle />
       </div>

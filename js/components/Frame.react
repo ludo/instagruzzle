@@ -1,27 +1,35 @@
 var React = require('react');
+
 var Tile = require('./Tile.react');
 
 var Frame = React.createClass({
   propTypes: {
+    cols: React.PropTypes.number,
+    rows: React.PropTypes.number,
     tiles: React.PropTypes.array
   },
 
   render: function () {
-    var tiles = this.props.tiles;
+    var cols = this.props.cols,
+        rows = this.props.rows,
+        tiles = this.props.tiles;
 
     var tileComponents = tiles.map(function (tile) {
       return (
         <Tile
           id={tile}
+          height={160}
           key={tile}
-          missing={tile == tiles.length - 1} />
+          missing={tile == tiles.length - 1}
+          width={160}
+          x={tile % cols}
+          y={Math.floor(tile / rows)} />
       );
     });
 
-    var edgeLength = Math.sqrt(tiles.length) * 100;
     var styleAttrs = {
-      height: edgeLength,
-      width: edgeLength
+      height: rows * 160,
+      width: cols * 160
     };
 
     return (
