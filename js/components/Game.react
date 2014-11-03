@@ -1,9 +1,15 @@
 var React = require('react');
+var Frame = require('./Frame.react');
+var MoveCounter = require('./MoveCounter.react');
+var Shuffle = require('./Shuffle.react');
 
 var Game = React.createClass({
   render: function() {
     return (
       <div className="game">
+        <Frame size={3 * 3} />
+        <MoveCounter />
+        <Shuffle />
       </div>
     );
   }

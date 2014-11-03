@@ -1,0 +1,28 @@
+var React = require('react');
+var Tile = require('./Tile.react');
+
+var Frame = React.createClass({
+  propTypes: {
+    size: React.PropTypes.number
+  },
+
+  render: function () {
+    var tiles = [];
+
+    for (var i = 1; i <= this.props.size; i++) {
+      tiles.push(<Tile
+        id={i}
+        key={i}
+        missing={(i == this.props.size)} />
+      );
+    }
+
+    return (
+      <div className="frame">
+        {tiles}
+      </div>
+    );
+  }
+});
+
+module.exports = Frame;

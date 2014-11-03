@@ -1,0 +1,11 @@
+var React = require('react');
+
+var Shuffle = React.createClass({
+  render: function () {
+    return (
+      <button>Shuffle</button>
+    );
+  }
+});
+
+module.exports = Shuffle;

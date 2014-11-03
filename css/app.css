@@ -1,3 +1,20 @@
-body {
-  background: #fff;
+.frame {
+  border: 1px solid #ccc;
+  display: table;
+  height: 300px;
+  width: 300px;
+}
+
+.tile {
+  background: #eee;
+  display: table-cell;
+  float: left;
+  height: 98px;
+  margin: 1px;
+  text-align: center;
+  width: 98px;
+}
+
+.tile.missing {
+  background: transparent;
 }

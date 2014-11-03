@@ -1,0 +1,11 @@
+var React = require('react');
+
+var MoveCounter = React.createClass({
+  render: function () {
+    return (
+      <span>Moves: 0</span>
+    );
+  }
+});
+
+module.exports = MoveCounter;

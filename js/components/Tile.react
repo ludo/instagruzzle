@@ -1,0 +1,23 @@
+var React = require('react/addons');
+
+var Tile = React.createClass({
+  propTypes: {
+    id: React.PropTypes.number,
+    missing: React.PropTypes.bool
+  },
+
+  render: function () {
+    var classes = React.addons.classSet({
+      'missing': this.props.missing,
+      'tile': true
+    });
+
+    return (
+      <div className={classes}>
+        {this.props.id}
+      </div>
+    );
+  }
+});
+
+module.exports = Tile;
