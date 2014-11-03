@@ -1,6 +1,7 @@
 var EventEmitter = require('events').EventEmitter;
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
+var FrameStore = require('../stores/FrameStore.js');
 var TileConstants = require('../constants/TileConstants');
 
 var CHANGE_EVENT = 'change';
@@ -12,9 +13,28 @@ var _tiles = [];
  * @param  {number} id
  */
 function create(id) {
-  _tiles.push({
-    id: id
-  });
+  _tiles.push(id);
+}
+
+/**
+ * Try to move a Tile to a new position.
+ *
+ * Should move to the 'missing' position if wihin reach or fail if no room to
+ * move.
+ * @param {number} id Tile id
+ */
+function move(id) {
+  var frameSize = FrameStore.getSize();
+  var maxId = (frameSize * frameSize) - 1;
+  var movements = [-frameSize, -1, 1, frameSize];
+  var idxOfClicked = _tiles.indexOf(id);
+  var idxOfMissing = _tiles.indexOf(maxId)
+
+  // Valid move?
+  if (movements.indexOf(idxOfClicked - idxOfMissing) >= 0) {
+    _tiles[idxOfMissing] = id;
+    _tiles[idxOfClicked] = maxId;
+  }
 }
 
 var TileStore = Object.assign(EventEmitter.prototype, {
@@ -68,17 +88,21 @@ var TileStore = Object.assign(EventEmitter.prototype, {
 // Register to handle all updates
 AppDispatcher.register(function (payload) {
   var action = payload.action;
-  var text;
 
-  switch(action.actionType) {
-    case TileConstants.TILE_SWAP:
-      swap(action.id1, action.id2);
-      TileStore.emitChange();
+  switch (action.actionType) {
+    case TileConstants.TILE_MOVE:
+      move(action.id);
+      break;
+
+    case TileConstants.TILE_SHUFFLE:
+      shuffle();
       break;
 
     default:
       return true;
   }
+
+  TileStore.emitChange();
 
   return true; // No errors. Needed by promise in Dispatcher.
 });

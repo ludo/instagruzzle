@@ -1,10 +1,18 @@
 var React = require('react');
 
+var TileActions = require('../actions/TileActions.js');
+
 var Shuffle = React.createClass({
   render: function () {
     return (
-      <button>Shuffle</button>
+      <button onClick={this._onClick}>
+        Shuffle
+      </button>
     );
+  },
+
+  _onClick: function () {
+    TileActions.shuffle();
   }
 });
 

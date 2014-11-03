@@ -1,5 +1,7 @@
 var React = require('react/addons');
 
+var TileActions = require('../actions/TileActions.js');
+
 var Tile = React.createClass({
   propTypes: {
     id: React.PropTypes.number,
@@ -13,10 +15,15 @@ var Tile = React.createClass({
     });
 
     return (
-      <div className={classes}>
+      <div className={classes} onClick={this._onClick}>
         {this.props.id}
       </div>
     );
+  },
+
+  _onClick: function () {
+    TileActions.move(this.props.id);
+    // TODO Register/count move
   }
 });
 

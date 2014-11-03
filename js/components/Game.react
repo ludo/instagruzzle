@@ -1,28 +1,29 @@
 var React = require('react');
 
 var Frame = require('./Frame.react');
+var FrameStore = require('../stores/FrameStore.js');
 var MoveCounter = require('./MoveCounter.react');
 var Shuffle = require('./Shuffle.react');
 var TileStore = require('../stores/TileStore.js');
 
-var FRAME_SIZE = 3;
-
-function getTileState() {
+function getGameState() {
   return {
-    tiles: TileStore.getAll(),
-    solved: TileStore.isSolved()
+    size: FrameStore.getSize(),
+    solved: TileStore.isSolved(),
+    tiles: TileStore.getAll()
   };
 }
 
 var Game = React.createClass({
-
   getInitialState: function () {
-    return getTileState();
+    return getGameState();
   },
 
   componentWillMount: function () {
+    var size = this.state.size;
+
     // Load tiles in Store
-    TileStore.seed(FRAME_SIZE * FRAME_SIZE);
+    TileStore.seed(size * size);
   },
 
   componentDidMount: function () {
@@ -44,7 +45,7 @@ var Game = React.createClass({
   },
 
   _onChange: function () {
-    this.setState(getTileState());
+    this.setState(getGameState());
   }
 
 });

@@ -12,14 +12,20 @@ var Frame = React.createClass({
     var tileComponents = tiles.map(function (tile) {
       return (
         <Tile
-          id={tile.id}
-          key={tile.id}
-          missing={tile.id == tiles.length - 1} />
+          id={tile}
+          key={tile}
+          missing={tile == tiles.length - 1} />
       );
     });
 
+    var edgeLength = Math.sqrt(tiles.length) * 100;
+    var styleAttrs = {
+      height: edgeLength,
+      width: edgeLength
+    };
+
     return (
-      <div className="frame">
+      <div className="frame" style={styleAttrs}>
         {tileComponents}
       </div>
     );
