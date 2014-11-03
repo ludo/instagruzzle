@@ -1,8 +1,8 @@
 {
-  "name": "instapuzzle",
+  "name": "instagruzzle",
   "version": "0.0.1",
   "description": "Implementation of 15-puzzle game with Flux and React",
-  "repository": "https://github.com/ludo/instapuzzle",
+  "repository": "https://github.com/ludo/instagruzzle",
   "main": "js/app.js",
   "dependencies": {
     "flux": "^2.0.0",
