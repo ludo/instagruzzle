@@ -1,4 +1,5 @@
 var EventEmitter = require('events').EventEmitter;
+var knuthShuffle = require('knuth-shuffle').knuthShuffle;
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var FrameStore = require('../stores/FrameStore.js');
@@ -25,16 +26,24 @@ function create(id) {
  */
 function move(id) {
   var frameSize = FrameStore.getSize();
-  var maxId = (frameSize * frameSize) - 1;
   var movements = [-frameSize, -1, 1, frameSize];
+
+  var maxId = (frameSize * frameSize) - 1;
   var idxOfClicked = _tiles.indexOf(id);
-  var idxOfMissing = _tiles.indexOf(maxId)
+  var idxOfMissing = _tiles.indexOf(maxId);
 
   // Valid move?
   if (movements.indexOf(idxOfClicked - idxOfMissing) >= 0) {
     _tiles[idxOfMissing] = id;
     _tiles[idxOfClicked] = maxId;
   }
+}
+
+/**
+ * Shuffle tiles to start a new game.
+ */
+function shuffle() {
+  knuthShuffle(_tiles);
 }
 
 var TileStore = Object.assign(EventEmitter.prototype, {

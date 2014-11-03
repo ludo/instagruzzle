@@ -6,6 +6,7 @@
   "main": "js/app.js",
   "dependencies": {
     "flux": "^2.0.0",
+    "knuth-shuffle": "~1.0.1",
     "react": "^0.12.0",
     "react-tools": "^0.12.0"
   },
